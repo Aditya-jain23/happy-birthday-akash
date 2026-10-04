@@ -358,6 +358,7 @@ modalBackdrop.addEventListener('click', closeModal);
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape' && !videoModal.classList.contains('hidden')) closeModal();
   if (e.key === 'Escape' && !finalReveal.classList.contains('hidden')) closeFinalReveal();
+  if (e.key === 'Escape' && !$('jokerOverlay').classList.contains('hidden')) closeJoker();
 });
 
 /* ════════════════════════════════════════════════════════════
@@ -389,14 +390,73 @@ function closeFinalReveal() {
   document.body.style.overflow = '';
 }
 
+/* ── Final Surprise button ── */
+const finalSurpriseBtn = $('finalSurpriseBtn');
+finalSurpriseBtn.addEventListener('click', () => {
+  closeFinalReveal();
+  openJoker();
+});
+
 finalBtn.addEventListener('click', () => {
-  /* reset everything */
   state.openedCards.clear();
   state.watchedCards.clear();
   state.activeCardId = null;
   state.finalShown = false;
-
   closeFinalReveal();
   updateCounter();
   dealCards();
 });
+
+/* ════════════════════════════════════════════════════════════
+   JOKER CARD
+════════════════════════════════════════════════════════════ */
+const JOKER_VIDEO = 'https://drive.google.com/file/d/1rQxsHV30PPolSJkOEjHDMwSBVgrfg0_a/preview';
+
+const jokerOverlay  = $('jokerOverlay');
+const jokerBackdrop = $('jokerBackdrop');
+const jokerCardSlot = $('jokerCardSlot');
+const jokerCardInner= $('jokerCardInner');
+const jokerClose    = $('jokerClose');
+
+function openJoker() {
+  /* reset flip state */
+  jokerCardInner.classList.remove('flipped');
+  jokerOverlay.classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeJoker() {
+  jokerOverlay.classList.add('hidden');
+  document.body.style.overflow = '';
+}
+
+jokerClose.addEventListener('click', closeJoker);
+jokerBackdrop.addEventListener('click', closeJoker);
+
+jokerCardSlot.addEventListener('click', () => {
+  if (jokerCardInner.classList.contains('flipped')) {
+    /* already flipped — open video */
+    openJokerVideo();
+    return;
+  }
+  playCardFlipSound();
+  jokerCardInner.classList.add('flipped');
+  setTimeout(openJokerVideo, 500);
+});
+
+jokerCardSlot.addEventListener('keydown', e => {
+  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); jokerCardSlot.click(); }
+});
+
+function openJokerVideo() {
+  closeJoker();
+  /* reuse existing modal with joker card data */
+  const jokerCard = {
+    id: 'joker',
+    rank: '🃏',
+    suit: '',
+    title: 'The Final Surprise',
+    video: JOKER_VIDEO,
+  };
+  openModal(jokerCard);
+}

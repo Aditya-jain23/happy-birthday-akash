@@ -154,7 +154,36 @@
       <p class="final-sub">Game over. You're officially older. 🎂</p>
       <h1 class="final-birthday">Happy Birthday<br><span id="finalFriendName">Yash</span> ❤️</h1>
       <p class="final-message">Here's to the laughs, the chaos, the memories — and many more to come.</p>
-      <button class="final-btn" id="finalBtn" aria-label="Play again">Deal Again</button>
+      <div class="final-actions">
+        <button class="final-surprise-btn" id="finalSurpriseBtn" aria-label="Final surprise">🃏 Final Surprise</button>
+        <button class="final-btn" id="finalBtn" aria-label="Play again">Deal Again</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       JOKER CARD OVERLAY
+  ═══════════════════════════════════════════ -->
+  <div id="jokerOverlay" class="joker-overlay hidden" role="dialog" aria-modal="true" aria-label="Final surprise">
+    <div class="joker-backdrop" id="jokerBackdrop"></div>
+    <div class="joker-scene">
+      <p class="joker-label">One last card…</p>
+      <div class="joker-card-slot" id="jokerCardSlot" tabindex="0" aria-label="Joker card — click to reveal">
+        <div class="joker-card-inner" id="jokerCardInner">
+          <!-- front: joker face-down -->
+          <div class="joker-front">
+            <div class="card-mystery">
+              <div class="card-mystery-q">🃏</div>
+              <div class="card-mystery-label">Click to reveal</div>
+            </div>
+          </div>
+          <!-- back: play button -->
+          <div class="joker-back">
+            <div class="card-back-play-only">▶</div>
+          </div>
+        </div>
+      </div>
+      <button class="joker-close" id="jokerClose" aria-label="Close">✕</button>
     </div>
   </div>
 
