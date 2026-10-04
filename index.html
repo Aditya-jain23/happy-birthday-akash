@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Akash ❤️</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       LANDING SCREEN
+  ═══════════════════════════════════════════ -->
+  <div id="landing" class="landing" role="main" aria-label="Birthday landing screen">
+    <div class="landing-particles" id="landingParticles"></div>
+
+    <!-- decorative deck cards left -->
+    <div class="casino-chips-left" aria-hidden="true">
+      <div class="side-deck-card sdc-1">
+        <div class="sdc-top">A<span class="red">♥</span></div>
+        <div class="sdc-center red">♥</div>
+        <div class="sdc-bot">A<span class="red">♥</span></div>
+      </div>
+      <div class="side-deck-card sdc-2">
+        <div class="sdc-top">K<span>♠</span></div>
+        <div class="sdc-center">♠</div>
+        <div class="sdc-bot">K<span>♠</span></div>
+      </div>
+      <div class="side-deck-card sdc-3">
+        <div class="sdc-top">Q<span class="red">♦</span></div>
+        <div class="sdc-center red">♦</div>
+        <div class="sdc-bot">Q<span class="red">♦</span></div>
+      </div>
+    </div>
+
+    <!-- decorative deck cards right -->
+    <div class="casino-chips-right" aria-hidden="true">
+      <div class="side-deck-card sdc-4">
+        <div class="sdc-top">J<span>♣</span></div>
+        <div class="sdc-center">♣</div>
+        <div class="sdc-bot">J<span>♣</span></div>
+      </div>
+      <div class="side-deck-card sdc-5">
+        <div class="sdc-top">10<span class="red">♥</span></div>
+        <div class="sdc-center red">♥</div>
+        <div class="sdc-bot">10<span class="red">♥</span></div>
+      </div>
+      <div class="side-deck-card sdc-6">
+        <div class="sdc-top">9<span>♠</span></div>
+        <div class="sdc-center">♠</div>
+        <div class="sdc-bot">9<span>♠</span></div>
+      </div>
+    </div>
+
+    <!-- floating decorative cards -->
+    <div class="float-cards" aria-hidden="true">
+      <div class="float-card fc-1">A<span class="red">♥</span></div>
+      <div class="float-card fc-2">K<span>♠</span></div>
+      <div class="float-card fc-3">Q<span class="red">♦</span></div>
+      <div class="float-card fc-4">J<span>♣</span></div>
+    </div>
+
+    <div class="landing-center">
+      <div class="landing-suit-row" aria-hidden="true">
+        <span class="suit red">♥</span>
+        <span class="suit">♠</span>
+        <span class="suit red">♦</span>
+        <span class="suit">♣</span>
+      </div>
+      <p class="landing-sub">A Little Game for Someone Special</p>
+      <h1 class="landing-title">Happy Birthday<br><span class="landing-name" id="friendName">Yash</span></h1>
+      <p class="landing-tagline">16 cards. 16 memories. One very special person.</p>
+      <button class="deal-btn" id="dealBtn" aria-label="Deal the cards">
+        <span class="deal-btn-inner">
+          <span class="deal-icon" aria-hidden="true">♠</span>
+          Deal the Cards
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       POKER TABLE
+  ═══════════════════════════════════════════ -->
+  <div id="table" class="table hidden" role="region" aria-label="Poker table with birthday memories">
+    <div class="table-felt">
+      <div class="table-ring"></div>
+      <div class="table-center-logo" aria-hidden="true">
+        <span class="tcl-suit">♥</span>
+        <span class="tcl-text">Birthday</span>
+        <span class="tcl-suit">♥</span>
+      </div>
+
+      <div class="cards-grid" id="cardsGrid" role="list" aria-label="Birthday memory cards"></div>
+
+      <div class="table-footer" aria-hidden="true">
+        <span class="tf-suit red">♥</span>
+        <span class="tf-text" id="openedCount">0 / 16 memories opened</span>
+        <span class="tf-suit red">♦</span>
+      </div>
+    </div>
+
+    <!-- back button -->
+    <button class="back-btn" id="backBtn" aria-label="Back to home">
+      ← Back
+    </button>
+
+    <!-- sound toggle -->
+    <button class="sound-toggle" id="soundToggle" aria-label="Toggle sound" title="Toggle sound">
+      <span id="soundIcon">🔈</span>
+    </button>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       VIDEO MODAL
+  ═══════════════════════════════════════════ -->
+  <div id="videoModal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Memory video">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-card-badge" id="modalCardBadge" aria-hidden="true"></div>
+        <h2 class="modal-title" id="modalTitle"></h2>
+        <button class="modal-close" id="modalClose" aria-label="Close memory">✕</button>
+      </div>
+      <div class="modal-video-wrap">
+        <div class="video-loading" id="videoLoading" aria-live="polite">
+          <div class="loading-spinner" aria-hidden="true"></div>
+          <p>Dealing your memory…</p>
+        </div>
+        <video
+          id="modalVideo"
+          controls
+          playsinline
+          preload="none"
+          aria-label="Birthday memory video"
+        ></video>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       FINAL REVEAL
+  ═══════════════════════════════════════════ -->
+  <div id="finalReveal" class="final-reveal hidden" role="dialog" aria-modal="true" aria-label="Final birthday reveal">
+    <div class="final-particles" id="finalParticles"></div>
+    <div class="final-content">
+      <div class="final-suits" aria-hidden="true">
+        <span class="suit red large">♥</span>
+        <span class="suit large">♠</span>
+        <span class="suit red large">♦</span>
+        <span class="suit large">♣</span>
+      </div>
+      <h2 class="final-headline">You've dealt all 16.</h2>
+      <p class="final-sub">Game over. You're officially older. 🎂</p>
+      <h1 class="final-birthday">Happy Birthday<br><span id="finalFriendName">Yash</span> ❤️</h1>
+      <p class="final-message">Here's to the laughs, the chaos, the memories — and many more to come.</p>
+      <button class="final-btn" id="finalBtn" aria-label="Play again">Deal Again</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
